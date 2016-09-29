@@ -12,6 +12,8 @@ $this->title = '会员列表';
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
+           <? echo $ip = Yii::$app->request->userIP;?>
+
             <table class="table table-hover">
                <thead>
                    <tr>
@@ -36,11 +38,13 @@ $this->title = '会员列表';
                <?php endforeach; ?>
                </tbody>
             </table>
+            <? echo yii\widgets\LinkPager::widget([
+                'pagination' => $pages1,
+            ]);?>
         </div>
         <div role="tabpanel" class="tab-pane" id="profile">
             <br>
             <a href="<? echo Url::to(['manager/add'])?>"><button type="button" class="btn btn-info">新增管理员</button></a>
-            <table class="table table-hover">
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -65,6 +69,9 @@ $this->title = '会员列表';
                     <?php endforeach; ?>
                     </tbody>
                 </table>
-            </table>
+            <? echo yii\widgets\LinkPager::widget([
+            'pagination' => $pages0,
+            ]);?>
+
         </div>
     </div>
