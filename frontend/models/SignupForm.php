@@ -12,6 +12,19 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $password1;
+    public $type;
+
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => '用户名',
+            'email' => '邮箱',
+            'password' => '密码',
+            'password1' => '确认密码',
+        ];
+    }
 
 
     /**
@@ -22,17 +35,25 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '此用户名已经注册！'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '此邮箱已经注册！'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+
+            ['password1', 'required'],
+            ['password1', 'string', 'min' => 6],
+            ['password1', 'compare', 'compareAttribute' => 'password', 'operator' => '==='],
+
+            ['type','required'],
+
         ];
     }
 
@@ -51,6 +72,7 @@ class SignupForm extends Model
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
+        $user->type = $this->type;
         $user->generateAuthKey();
         
         return $user->save() ? $user : null;

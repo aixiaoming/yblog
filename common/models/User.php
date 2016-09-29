@@ -25,8 +25,7 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-    public $password;
-    public $password1;
+
 
     /**
      * @inheritdoc
@@ -54,26 +53,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            [['username', 'auth_key', 'password_hash','email', 'created_at', 'updated_at','password','password1'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key'], 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token', 'email'], 'string', 'max' => 256],
-            ['email','email'],
-            ['password1', 'compare', 'compareAttribute' => 'password', 'operator' => '==='],
-            ['username','unique', 'message'=>'此用户名已经注册！'],
-            ['email','unique', 'message'=>'此邮箱已经注册！'],
         ];
     }
 
-    public function attributeLabels()
-    {
-        return [
-            'username' => '用户名',
-            'email' => '邮箱',
-            'password' => '密码',
-            'password1' => '确认密码',
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -206,18 +189,4 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function addmanager(){
-
-        if (!$this->validate()) {
-            return null;
-        }
-
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        $user->type=$this->type;
-        return $user->save(false) ? $user : null;
-    }
 }
