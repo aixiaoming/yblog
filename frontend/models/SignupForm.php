@@ -77,4 +77,17 @@ class SignupForm extends Model
         
         return $user->save() ? $user : null;
     }
+
+//    public function updatesave()
+//    {
+//        if (!$this->validate()) {
+//            return null;
+//        }
+//
+//        $user = User::find()->where(['id'=>$this->id]);
+//        $user->email = $this->email;
+//        $user->setPassword($this->password);
+//
+//        return $user->save() ? $user : null;
+//    }
 }

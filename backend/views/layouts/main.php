@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+$this->registerCssFile('../web/css/main.css');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -36,7 +37,9 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => '文章', 'url' => ['/article/index']],
         ['label' => '会员管理', 'url' => ['/manager/index']],
+        ['label' => '前台分类', 'url' => ['/frontmenu/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

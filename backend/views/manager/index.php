@@ -12,8 +12,6 @@ $this->title = '会员列表';
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
-           <? echo $ip = Yii::$app->request->userIP;?>
-
             <table class="table table-hover">
                <thead>
                    <tr>

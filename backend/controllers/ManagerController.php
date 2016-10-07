@@ -57,4 +57,30 @@ class ManagerController extends Controller
         ]);
 
     }
+
+    public function actionUpdate($id){
+        print_r($id);
+        $model=User::find()->where(['id'=>$id])->one();
+        if(Yii::$app->request->isPost){
+            $post = Yii::$app->request->post();
+            print_r($post);
+            if ($model->updatesave($post)) {
+                Yii::$app->session->setFlash('info', '修改成功');
+                $this->redirect(['manager/index']);
+                Yii::$app->end();
+            }
+        }
+        return $this->render('update',[
+            'model'=>$model
+        ]);
+    }
+
+    public function actionDelete($id){
+        User::deleteAll(['id'=>$id]);
+        Yii::$app->session->setFlash('info', '删除成功');
+        $this->redirect(['manager/index']);
+        Yii::$app->end();
+    }
 }
+
+
