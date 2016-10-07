@@ -73,10 +73,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model= new Article();
+
+        $articles = Article::find()->where(['issee'=>1])->all();
         return $this->render('index',
         [
-            'model'=>$model,
+            'articles'=>$articles,
         ]);
     }
 
