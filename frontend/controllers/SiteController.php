@@ -74,7 +74,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        $articles = Article::find()->where(['issee'=>1])->all();
+        $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC')->all();
         return $this->render('index',
         [
             'articles'=>$articles,
@@ -159,14 +159,22 @@ class SiteController extends Controller
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
+                }else{
+                    var_dump($model->getErrors());
                 }
+            }else{
+                var_dump($model->getErrors());
             }
+        }else{
+            var_dump($model->getErrors());
         }
 
         return $this->render('signup', [
             'model' => $model,
         ]);
     }
+
+
 
     /**
      * Requests password reset.

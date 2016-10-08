@@ -75,19 +75,7 @@ class SignupForm extends Model
         $user->type = $this->type;
         $user->generateAuthKey();
         
-        return $user->save() ? $user : null;
+        return $user->save(false) ? $user : null;
     }
 
-//    public function updatesave()
-//    {
-//        if (!$this->validate()) {
-//            return null;
-//        }
-//
-//        $user = User::find()->where(['id'=>$this->id]);
-//        $user->email = $this->email;
-//        $user->setPassword($this->password);
-//
-//        return $user->save() ? $user : null;
-//    }
 }
