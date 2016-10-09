@@ -22,7 +22,7 @@ class ArticleController extends Controller
             try{
                 $model->img= UploadedFile::getInstance($model, 'img');
                 $filename=time().rand(1000,9999);
-                $filepath='../web/upload/img/faceimg/'.$filename.'.'.$model->img->extension;
+                $filepath='../../upload/articleimg/'.$filename.'.'.$model->img->extension;
                 if (!$model->img->saveAs($filepath)) {
                     throw new \Exception('封面图片添加失败！');
                 }else{
@@ -97,7 +97,7 @@ class ArticleController extends Controller
             }else{
                 unlink($oldimg);
                 $filename=time().rand(1000,9999);
-                $filepath='../web/upload/img/faceimg/'.$filename.'.'.$model->img->extension;
+                $filepath='../../upload/articleimg/'.$filename.'.'.$model->img->extension;
                 if (!$model->img->saveAs($filepath)) {
                     throw new \Exception('封面图片添加失败！');
                 }

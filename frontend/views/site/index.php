@@ -5,6 +5,45 @@ use yii\helpers\Url;
 
 $this->title = '首页';
 ?>
-<? foreach ($articles as $article):?>
-    <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><? echo $article->title;?></a><br>
-<? endforeach;?>
+
+
+<div class="site-index">
+    <? foreach ($articles as $article):?>
+        <div  class="row index-list">
+            <div class="col-lg-4 img">
+                <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><img src="<? echo $article->img;?>"></a>
+            </div>
+            <div class="col-lg-8">
+                <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><? echo $article->title;?></a>
+                <div class="col-lg-12 tip">
+                    <div class="col-lg-4">
+                        <span class="glyphicon glyphicon-calendar">
+                            <? echo date('Y-m-d',$article->createtime);?>
+                        </span>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <span class="glyphicon glyphicon-eye-open">
+                            浏览 <? echo $article->seenum;?>
+                        </span>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <span class="glyphicon glyphicon-comment">
+                            评论
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <p><? echo $article->abstract;?></p>
+                </div>
+            </div>
+        </div>
+    <? endforeach;?>
+</div>
+
+
+
+
+
+

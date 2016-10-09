@@ -2,6 +2,6 @@
 /* @var $this yii\web\View */
 ?>
 
-<div class="col-lg-8">
+<div class="article-show">
     <? echo $article->content;?>
 </div>

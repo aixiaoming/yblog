@@ -73,7 +73,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC')->all();
         return $this->render('index',
         [
@@ -159,14 +158,8 @@ class SiteController extends Controller
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
-                }else{
-                    var_dump($model->getErrors());
                 }
-            }else{
-                var_dump($model->getErrors());
             }
-        }else{
-            var_dump($model->getErrors());
         }
 
         return $this->render('signup', [
@@ -175,6 +168,18 @@ class SiteController extends Controller
     }
 
 
+//$model = new SignupForm();
+//if ($model->load(Yii::$app->request->post())) {
+//if ($user = $model->signup()) {
+//yii::$app->session->setFlash('success','新增管理员成功。');
+//$this->redirect(['manager/index']);
+//Yii::$app->end();
+//}
+//}
+//
+//return $this->render('add', [
+//    'model' => $model,
+//]);
 
     /**
      * Requests password reset.
