@@ -43,6 +43,7 @@ $this->title = '首页';
         </div>
     </div>
 <? endforeach;?>
+
 <div class="row">
     <?echo LinkPager::widget([
         'pagination' => $pager,
