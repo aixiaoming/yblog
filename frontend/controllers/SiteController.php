@@ -13,6 +13,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\data\Pagination;
 
 /**
  * Site controller
@@ -73,10 +74,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC')->all();
+        $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC');
+        $count = $articles->count();
+        $pageSize = Yii::$app->params['pageSize']['site'];
+        $pagination = new Pagination(['totalCount' => $count,'pageSize' => $pageSize]);
+        $articles = $articles->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         return $this->render('index',
         [
             'articles'=>$articles,
+            'pager' => $pagination,
         ]);
     }
 

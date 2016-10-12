@@ -37,6 +37,7 @@ $this->registerCssFile('../web/css/main.css');
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label'=>'网站管理','url'=>['website/index']],
         ['label' => '文章', 'url' => ['/article/index']],
         ['label' => '会员管理', 'url' => ['/manager/index']],
         ['label' => '前台分类', 'url' => ['/frontmenu/index']],

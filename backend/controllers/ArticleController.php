@@ -65,7 +65,7 @@ class ArticleController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find(),
+            'query' => Article::find()->orderBy('createtime DESC'),
             'pagination' => [
             'pageSize' => 15,
             ],
