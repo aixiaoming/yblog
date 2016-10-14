@@ -12,6 +12,11 @@ use backend\models\LoginForm;
  */
 class SiteController extends Controller
 {
+
+//    public function setLayout($layout)
+//    {
+//        $this->layout = ;
+//    }
     /**
      * @inheritdoc
      */
@@ -60,6 +65,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+//        $this->layout='mainn.php';
         return $this->render('index');
     }
 
@@ -70,6 +76,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout=false;
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

@@ -13,6 +13,7 @@ use yii\helpers\Html;
 
 <a href="<? echo Url::to(['website/add'])?>"><button class="btn btn-primary">新增</button></a>
 
+
 <?php $form = ActiveForm::begin(); ?>
     <? foreach($lists as $list):?>
         <?= $form->field($list,"content['$list->type']")->textInput(['value'=>$list->content])->label($list->type) ?>
@@ -21,6 +22,5 @@ use yii\helpers\Html;
         <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
     </div>
 <?php ActiveForm::end(); ?>
-
 
 

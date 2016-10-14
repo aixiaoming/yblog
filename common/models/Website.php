@@ -31,6 +31,7 @@ class Website extends \yii\db\ActiveRecord
             [['content'], 'required','on'=>['']],
             [['type'], 'string', 'max' => 32,'on'=>['type']],
             [['content'], 'string', 'max' => 255],
+            ['englishtype','safe']
         ];
     }
 
@@ -43,6 +44,7 @@ class Website extends \yii\db\ActiveRecord
             'id' => 'ID',
             'type' => '类目',
             'content' => '内容',
+            'englishtype'=>'英文表示',
         ];
     }
 
