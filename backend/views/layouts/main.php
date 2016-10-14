@@ -146,12 +146,12 @@ $this->registerCssFile('../web/css/main.css');
     </div>
     <script src="../web/js/jquery.min.js?v=2.1.4"></script>
     <script src="../web/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="../web/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../web/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="../web/js/plugins/layer/layer.min.js"></script>
-    <script src="../web/js/hplus.min.js?v=4.0.0"></script>
-    <script type="text/javascript" src="../web/js/contabs.min.js"></script>
-    <script src="../web/js/plugins/pace/pace.min.js"></script>
+<!--    <script src="../web/js/plugins/metisMenu/jquery.metisMenu.js"></script>-->
+<!--    <script src="../web/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>-->
+<!--<!--    <script src="../web/js/plugins/layer/layer.min.js"></script>-->-->
+<!--    <script src="../web/js/hplus.min.js?v=4.0.0"></script>-->
+<!--    <script type="text/javascript" src="../web/js/contabs.min.js"></script>-->
+<!--    <script src="../web/js/plugins/pace/pace.min.js"></script>-->
     <?php $this->endBody() ?>
     </body>
     </html>
