@@ -7,9 +7,12 @@
  */
 use yii\helpers\Url;
 ?>
-<a href="<? echo Url::to(['frontmenu/add'])?>"><button class="btn btn-info">新增分类</button></a>
 
-<div>
+
+<div class="frontmenu-index">
+
+    <a href="<? echo Url::to(['frontmenu/add'])?>"><button class="btn btn-info">新增分类</button></a>
+
     <table class="table table-striped">
         <thead>
         <tr>

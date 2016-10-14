@@ -16,6 +16,7 @@ class ArticleController extends Controller
 {
     public function actionAdd()
     {
+        $this->layout='mainart.php';
         $model = new Article();
         $model->loadDefaultValues();
         if(Yii::$app->request->isPost){
@@ -78,6 +79,7 @@ class ArticleController extends Controller
 
     public function actionUpdate()
     {
+        $this->layout='mainart.php';
         $id = yii::$app->request->get();
         $model = Article::find()->where(['id'=>$id])->one();
         $oldimg=$model->img;

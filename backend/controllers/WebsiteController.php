@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use common\models\Website;
 use Yii;
-use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 
 

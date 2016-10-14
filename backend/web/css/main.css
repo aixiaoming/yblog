@@ -1,11 +1,17 @@
-/*
+#content-main{padding: 30px;padding-top: 15px;overflow: auto;}
+
+
+.article-add{background-color: #ffffff;min-height:800px;padding-top: 30px;overflow: auto;}
 .article-add .redactor-editor{min-height:300px;max-height:400px;overflow-y: auto;}
 .article-add #article-abstract{min-height:150px;}
 
+.article-update{background-color: #ffffff;min-height:800px;padding-top: 30px;overflow: auto;}
 .article-update .redactor-editor{min-height:300px;max-height:400px;overflow-y: auto;}
 .article-update #article-abstract{min-height:150px;}
 .article-update .file-preview-frame img{max-width: 100%;}
-*/
+
+.website-index{margin-top: 15px;}
 
 
-#content-main{padding: 30px;}
+.frontmenu-index{min-height: 500px;background-color: #ffffff;padding: 30px;}
+.frontmenu-index table{margin-top: 15px;}

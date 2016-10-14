@@ -13,8 +13,8 @@ use yii\widgets\ActiveForm;
 
 <div class="website-update">
     <?php $form = ActiveForm::begin(); ?>
-<?= $form->field($model,'type')->textInput() ?>
-<?= $form->field($model,'englishtype')->textInput() ?>
+    <?= $form->field($model,'type')->textInput() ?>
+    <?= $form->field($model,'englishtype')->textInput() ?>
 <div class="form-group submit">
     <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
 </div>

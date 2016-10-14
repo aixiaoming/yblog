@@ -9,13 +9,6 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\helpers\Url;
 
-
-$this->registerCssFile('../web/css/bootstrap.min.css');
-$this->registerCssFile('../web/css/font-awesome.min.css');
-$this->registerCssFile('../web/css/animate.min.css');
-$this->registerCssFile('../web/css/style.min.css');
-$this->registerCssFile('../web/css/main.css');
-
 ?>
 
 <?php $this->beginPage() ?>
@@ -144,6 +137,11 @@ $this->registerCssFile('../web/css/main.css');
             </div>
         </div>
     </div>
+    <link href="../web/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../web/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../web/css/animate.min.css" rel="stylesheet">
+    <link href="../web/css/style.min.css" rel="stylesheet">
+    <link href="../web/css/main.css" rel="stylesheet">
     <script src="../web/js/jquery.min.js?v=2.1.4"></script>
     <script src="../web/js/bootstrap.min.js?v=3.3.5"></script>
     <script src="../web/js/plugins/metisMenu/jquery.metisMenu.js"></script>

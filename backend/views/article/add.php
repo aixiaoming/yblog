@@ -11,7 +11,6 @@ use kartik\select2\Select2;
 /* @var $form ActiveForm */
 ?>
 <div class="article-add">
-
     <?php $form = ActiveForm::begin( ['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="col-lg-8">
             <?= $form->field($model, 'title')->textInput(['autofocus' => true]) ?>
@@ -19,7 +18,7 @@ use kartik\select2\Select2;
             <?= $form->field($model, 'content')->widget(\yii\redactor\widgets\Redactor::className()           ,['clientOptions' => [
                 'imageManagerJson' => ['/redactor/upload/image-json'],
                  'imageUpload' => ['/redactor/upload/image'],
-                'fileUpload' => ['/redactor/upload/file'],
+                 'fileUpload' => ['/redactor/upload/file'],
                 'lang' => 'zh_cn',
                 'plugins' => ['clips', 'fontcolor','imagemanager']
                 ]
@@ -36,8 +35,6 @@ use kartik\select2\Select2;
                     'maxFileCount' => 1,  // 最多上传的文件个数限制
                 ],
             ]) ?>
-<!--            r \common\models\User::find()->select(['id','username'])->where(['status'=>10,'type'=>0])->all()-->
-
             <?= $form->field($model, 'issee')->checkbox() ?>
             <?= $form->field($model, 'userid')->widget(Select2::classname(), [
                 'data' =>\yii\helpers\ArrayHelper::map(common\models\User::find()->where(['status'=>10,'type'=>0])->all(),'id','username'),
@@ -60,8 +57,5 @@ use kartik\select2\Select2;
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary col-lg-12']) ?>
             </div>
         </div>
-
-
     <?php ActiveForm::end(); ?>
-
-</div><!-- article-add -->
+</div>
