@@ -30,8 +30,8 @@ class Website extends \yii\db\ActiveRecord
             [['type'], 'required','on'=>['type']],
             [['content'], 'required','on'=>['']],
             [['type'], 'string', 'max' => 32,'on'=>['type']],
-            [['content'], 'string', 'max' => 255],
-            ['englishtype','safe']
+            ['englishtype','safe'],
+            ['content','safe']
         ];
     }
 

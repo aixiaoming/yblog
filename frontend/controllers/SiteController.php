@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Article;
+use common\models\Website;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -151,7 +152,13 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = Website::find()->where(['englishtype'=>'site-about'])->one();
+
+        return $this->render('about',
+        [
+        'model'=>$model,
+        ]
+        );
     }
 
     /**

@@ -24,5 +24,8 @@ body{background-color: #f1f4f9!important;font-family: "Microsoft YaHei", 微软�
 .index-list p{line-height: 25px;text-indent: 2em;color: #3d3d3d!important;font-size: 14px;}
 
 
-.article-show{background-color: #fff;padding: 15px;border: 1px solid #ffffff;min-height: 800px;margin-bottom: 30px;}
-.article-show:hover{border: 1px solid #fff;  -webkit-box-shadow: rgba(0,170,255,.3) 0 0 8px;-moz-box-shadow: rgba(0,170,255,.3) 0 0 8px; box-shadow: rgba(0,170,255,.3) 0 0 8px;}
+.about,.article-show{background-color: #fff;padding: 15px;border: 1px solid #ffffff;min-height: 800px;margin-bottom: 30px;}
+.about:hover,.article-show:hover{border: 1px solid #fff;  -webkit-box-shadow: rgba(0,170,255,.3) 0 0 8px;-moz-box-shadow: rgba(0,170,255,.3) 0 0 8px; box-shadow: rgba(0,170,255,.3) 0 0 8px;}
+
+
+

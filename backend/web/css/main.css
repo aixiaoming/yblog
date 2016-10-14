@@ -15,3 +15,5 @@
 
 .frontmenu-index{min-height: 500px;background-color: #ffffff;padding: 30px;}
 .frontmenu-index table{margin-top: 15px;}
+
+.website-updateother .redactor-editor{min-height:300px;max-height:400px;overflow-y: auto;}

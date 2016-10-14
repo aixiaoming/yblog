@@ -11,6 +11,7 @@ use yii\helpers\Html;
 ?>
 
 <a href="<? echo Url::to(['website/add'])?>"><button class="btn btn-primary">新增设置</button></a>
+<a href="<? echo Url::to(['website/other'])?>"><button class="btn btn-info">其他设置</button></a>
 
 
 <div class="ibox float-e-margins website-index">
