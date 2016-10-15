@@ -10,6 +10,14 @@ body{background-color: #f1f4f9!important;font-family: "Microsoft YaHei", 微软�
 .navbar a{color: #ffffff;}
 .navbar .btn-link{color: #ffffff;}
 .navbar .navbar-toggle .icon-bar{background-color:#ffffff!important;}
+.navbar form{background-color: #ffffff;border-radius: 4px;max-width:100%;padding: 0px;padding-left: 5px;}
+.navbar form input{border: 0;outline: none;height: 32px;}
+.navbar form input:focus{border: 0;outline: none;}
+.navbar form button{background-color: transparent;border: 0px;height: 32px;}
+.navbar form button:active{background-color: transparent;border: 0px;}
+
+
+
 
 /*.site-index{border: 1px solid #ffffff;}
 .site-index:hover{border: 1px solid #fff;  -webkit-box-shadow: rgba(0,170,255,.3) 0 0 8px;-moz-box-shadow: rgba(0,170,255,.3) 0 0 8px; box-shadow: rgba(0,170,255,.3) 0 0 8px;}*/

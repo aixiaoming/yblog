@@ -65,6 +65,7 @@ class ArticleController extends Controller
 
     public function actionIndex()
     {
+		$this->layout='mainart.php';
         $dataProvider = new ActiveDataProvider([
             'query' => Article::find()->orderBy('createtime DESC'),
             'pagination' => [

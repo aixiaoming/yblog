@@ -5,5 +5,6 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'pageSize' => [
         'site'=>10,
+        'article'=>10,
     ],
 ];

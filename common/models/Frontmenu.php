@@ -33,6 +33,7 @@ class Frontmenu extends ActiveRecord
             ['parentid','required' ],
             [['title'], 'string', 'max' => 255],
             ['title','required' ],
+            ['route','safe']
         ];
     }
 
@@ -44,6 +45,7 @@ class Frontmenu extends ActiveRecord
         return [
             'id' => 'ID',
             'title' => '分类名称',
+            'route'=>'路由',
             'parentid' => '上级分类',
         ];
     }

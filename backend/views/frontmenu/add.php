@@ -23,6 +23,7 @@ $this->title = '新增分类';
         ]); ?>
         <?= $form->field($model, 'parentid')->dropDownList($list) ?>
         <?= $form->field($model, 'title') ?>
+        <?= $form->field($model, 'route') ?>
         <div class="form-group submit">
             <div class="col-sm-2"></div>
             <?= Html::submitButton('保存', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

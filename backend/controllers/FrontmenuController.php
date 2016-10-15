@@ -16,6 +16,7 @@ class FrontmenuController extends Controller{
 
     public function actionIndex()
     {
+        $this->layout='mainart.php';
         $model = new Frontmenu();
         $list= $model->getTreeList();
         return $this->render('index',

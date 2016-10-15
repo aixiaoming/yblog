@@ -18,6 +18,7 @@ use yii\helpers\Url;
         <tr>
             <td>分类id</td>
             <td>分类名称</td>
+            <td>路由</td>
             <td>上级分类</td>
             <td>操作</td>
         </tr>
@@ -27,6 +28,7 @@ use yii\helpers\Url;
             <tr>
                 <td><?php echo  $list['id']; ?></td>
                 <td><?php echo  $list['title']; ?></td>
+                <td><?php echo  $list['route']; ?></td>
                 <td><?php echo  $list['parentid']; ?></td>
                 <td> <a href="<? echo Url::to(['frontmenu/update','id'=>$list['id']])?>">修改</a>&nbsp;<a href="<? echo Url::to(['frontmenu/delete','id'=>$list['id']])?>">删除</a></td>
             </tr>
