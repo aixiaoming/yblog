@@ -11,9 +11,14 @@ use yii\helpers\Url;
 
 
 AppAsset::register($this);
-$this->registerJsFile('../../backend/web/js/jquery.min.js');
+$this->registerJsFile('../../../backend/web/js/jquery.min.js',['position'=> $this::POS_HEAD]);
 $this->registerJsFile('../../backend/web/js/bootstrap.min.js');
-$this->registerCssFile('../web/css/main.css');
+$this->registerJsFile('../../../common/assets/layer/layer.js',['position'=> $this::POS_HEAD]);
+$this->registerCssFile('../../../common/assets/layer/skin/default/layer.css',['position'=> $this::POS_HEAD]);
+$this->registerJsFile('../../frontend/web/js/zzsc.js');
+
+
+
 
 ?>
 <?php $this->beginPage() ?>
@@ -22,9 +27,18 @@ $this->registerCssFile('../web/css/main.css');
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="<? echo $this->params['title']; ?>-建立自己的个人自媒体博客！本博客主要关注IT互联网领域并分享相关的下载资源,搜索引擎优化(SEO)知识,建站心得,特效代码,美文美句,推广营销等方面的经验心得。" />
+    <meta name="ThemeAuthor" content="amuker(http://www.aiblogs.cn)">
+    <meta name="keywords" content="<? echo $this->params['title']; ?>,个人博客,php,博客日记,网站建设,优化技巧" />
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title) ?>--<? echo $this->params['title']; ?>-建立自己的个人自媒体博客</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;url=../views/site/ie.html">
+    <![endif]-->
     <?php $this->head() ?>
+    <meta name="baidu-site-verification" content="fT0ogtK9qJ" />
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -72,7 +86,7 @@ $this->registerCssFile('../web/css/main.css');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<? echo Yii::$app->homeUrl?>"><? echo \common\models\Website::find()->where(['englishtype'=>'site-title'])->one()->content;?></a>
+                <a class="navbar-brand" href="<? echo Yii::$app->homeUrl?>"><? echo $this->params['title']; ?></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +95,7 @@ $this->registerCssFile('../web/css/main.css');
                     <? foreach($this->params['menu'] as $menu):?>
                     <? $lists=\common\models\Frontmenu::find()->where(['parentid'=>$menu->id])->all()?>
                         <?php if (empty($lists)) : ?>
-                            <li><a href="<? echo Url::to([$menu->route])?>"><? echo $menu->title;?></a></li>
+                            <li><a href="<? echo Url::to([$menu->route,'id'=>$menu->id])?>"><? echo $menu->title;?></a></li>
                         <?php else : ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><? echo $menu->title;?><span class="caret"></span></a>
@@ -96,10 +110,14 @@ $this->registerCssFile('../web/css/main.css');
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <form class="navbar-form navbar-left" role="search" action="<? echo Url::to(['search/search'])?>"  method="post">
-                        <div class="form-group">
-                            <input type="text" placeholder="搜些什么吧" name="search">
+                        <div class="input-group">
+                          <input class="form-control" type="text" placeholder="搜些什么吧" name="search">
+                          <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                         </div>
-                        <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+<!--                         <div class="form-group"> -->
+<!--                             <input type="text" placeholder="搜些什么吧" name="search"> -->
+<!--                         </div> -->
+<!--                         <button type="submit"><span class="glyphicon glyphicon-search"></span></button> -->
                     </form>
                     <li><a href="<?  echo Url::to(['site/login'])?>">登录</a></li>
                 </ul>
@@ -121,19 +139,66 @@ $this->registerCssFile('../web/css/main.css');
                 <a href="#" class="list-group-item">
                     最新文章
                 </a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
+                <? foreach($this->params['newarticle'] as $newarticle):?>
+                    <a href="<? echo Url::to(['article/show','id'=>$newarticle->id])?>" class="list-group-item"><span class="glyphicon glyphicon-chevron-right"></span> <? echo $newarticle->title?></a>
+                <?endforeach;?>
             </div>
-        </div>
+            <? if($this->params['ad']!=''):?>
+                <div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">
+                            广告
+                        </a>
+                       <div>
+
+                       </div>
+                    </div>
+                </div>
+            <? endif ?>
+<!--            <div>-->
+<!--                <div class="list-group">-->
+<!--                    <a href="#" class="list-group-item">-->
+<!--                    最新评论-->
+<!--                    </a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <div class="list-group">-->
+<!--                    <a href="#" class="list-group-item">-->
+<!--                        友情链接-->
+<!--                    </a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                    <a href="#" class="list-group-item"></a>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div>
+                <div class="list-group tags">
+                    <a href="#" class="list-group-item">
+                        标签云
+                    </a>
+                    <div class="span">
+                        <? foreach($this->params['tag'] as $tag):?>
+                            <a href="<? echo Url::to(['search/search-use-tag','tag'=>$tag->tag])?>"><span class="label"><? echo $tag->tag?></span></a>
+                        <?endforeach;?>
+                    </div>
+                </div>
+            </div>
+<!--        </div>-->
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Blog <?= date('Y') ?></p>
-        <p class="pull-right"></p>
+        <div class="col-sm-6 left">&copy; <? echo $this->params['title']; ?> <?= date('Y') ?> <? echo $this->params['icp']; ?></div>
+        <div class="col-sm-6 right">站长统计 | <a href="http://www.aiblogs.cn/backend/web/index.php">博客管理</a></div>
     </div>
 </footer>
 
@@ -141,3 +206,29 @@ $this->registerCssFile('../web/css/main.css');
 </body>
 </html>
 <?php $this->endPage() ?>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15e78f270ec752fae3d7e8c090df16a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript">
+    $('.input-group-addon').click(function(){
+        $('.navbar-form').submit();
+    });
+    $(document).ready(function () {
+        var tagclass=['label-default','label-primary','label-success','label-info','label-warning','label-danger'];
+        $('.tags span').each(function () {
+            $(this).addClass(tagclass[Math.floor(Math.random()*6)]);
+        });
+    });
+    $(".tags span").each(function(k,img){
+        new JumpObj(img,15);//晃动幅度
+        $(img).hover(function(){this.parentNode.parentNode.addclassName="hover"});
+    });
+</script>
+
+

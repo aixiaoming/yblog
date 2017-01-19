@@ -5,8 +5,8 @@ return [
     'modules' => [
         'redactor' => [
             'class' => 'yii\redactor\RedactorModule',
-            'uploadDir' => '../web/upload/img',
-            'uploadUrl' => '../web/upload/img',
+            'uploadDir' => '../../upload/siteimg',
+            'uploadUrl' => '../../upload/siteimg',
             'imageAllowExtensions'=>['jpg','png','gif']
         ],
     ],

@@ -9,6 +9,8 @@ use Yii;
  *
  * @property integer $Id
  * @property string $title
+ * @property string tag
+ * @property string keywords
  * @property string $abstract
  * @property string $content
  * @property string $img
@@ -41,6 +43,7 @@ class Article extends \yii\db\ActiveRecord
             [['issee', 'userid', 'menuid', 'issay', 'isoriginal', 'seenum'], 'integer'],
             [['title', 'img'], 'string', 'max' => 255],
             [['abstract'], 'string', 'max' => 500],
+            [['tag','keywords'],'safe'],
         ];
     }
 
@@ -62,6 +65,8 @@ class Article extends \yii\db\ActiveRecord
             'isoriginal' => '是否原创',
             'seenum' => '点击量',
             'createtime' => '发布时间',
+            'tag' => '标签',
+            'keywords' => 'SEO关键字',
         ];
     }
 }

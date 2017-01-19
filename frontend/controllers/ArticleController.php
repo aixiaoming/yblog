@@ -18,8 +18,11 @@ class ArticleController extends BaseController
     {
         $id=Yii::$app->request->get();
         $article=Article::find()->where(['id'=>$id])->one();
+        $article->seenum=$article->seenum+1;
+        $article->save();
         return $this->render('show',
-            ['article'=>$article]
+            ['article'=>$article,
+            ]
         );
     }
 

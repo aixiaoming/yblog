@@ -33,7 +33,7 @@ $this->title = '首页';
 
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-comment">
-                        评论
+                        评论 &nbsp;<span id = "sourceId::<? echo $article->id; ?>" class = "cy_cmt_count" ></span>
                     </span>
                 </div>
             </div>
@@ -50,6 +50,9 @@ $this->title = '首页';
     ]);?>
 </div>
 
+<script id="cy_cmt_num" 
+			src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cysI0uifa">
+</script>
 
 
 

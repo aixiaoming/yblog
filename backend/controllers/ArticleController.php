@@ -30,6 +30,7 @@ class ArticleController extends Controller
                     if($model->load(Yii::$app->request->post())){
                         $model->img=$filepath;
                         $model->createtime=time();
+                        $model->abstract=htmlspecialchars($model->abstract);
 //                        $this->redirect(['article/index']);
                         if( $model->save()){
                             yii::$app->session->setFlash('info','发布成功');
@@ -89,12 +90,11 @@ class ArticleController extends Controller
             if($img==null){
                 if($model->load(Yii::$app->request->post())){
                     $model->img=$oldimg;
+                    $model->abstract=htmlspecialchars($model->abstract);
                     if( $model->save()){
                         yii::$app->session->setFlash('info','修改成功');
                         $this->redirect(['article/index']);
                         yii::$app->end();
-                    }else{
-                        var_dump($model->getErrors());
                     }
                 }
             }else{
@@ -106,16 +106,16 @@ class ArticleController extends Controller
                 }
                 if($model->load(Yii::$app->request->post())){
                     $model->img=$filepath;
+                    $model->abstract=htmlspecialchars($model->abstract);
                     if( $model->save()){
                         yii::$app->session->setFlash('info','修改成功');
                         $this->redirect(['article/index']);
                         yii::$app->end();
-                    }else{
-                        var_dump($model->getErrors());
                     }
                 }
             }
         }
+        $model->abstract=htmlspecialchars_decode($model->abstract);
         return $this->render('update',
             ['model'=>$model]
         );

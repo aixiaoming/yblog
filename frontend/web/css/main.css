@@ -10,13 +10,16 @@ body{background-color: #f1f4f9!important;font-family: "Microsoft YaHei", 微软�
 .navbar a{color: #ffffff;}
 .navbar .btn-link{color: #ffffff;}
 .navbar .navbar-toggle .icon-bar{background-color:#ffffff!important;}
-.navbar form{background-color: #ffffff;border-radius: 4px;max-width:100%;padding: 0px;padding-left: 5px;}
+/* .navbar form{background-color: #ffffff;border-radius: 4px;max-width:100%;padding: 0px;padding-left: 5px;}
 .navbar form input{border: 0;outline: none;height: 32px;}
 .navbar form input:focus{border: 0;outline: none;}
 .navbar form button{background-color: transparent;border: 0px;height: 32px;}
 .navbar form button:active{background-color: transparent;border: 0px;}
+ */
+.navbar form .input-group-addon{cursor: pointer;}
 
 
+.container .layout-left{min-height: 810px;}
 
 
 /*.site-index{border: 1px solid #ffffff;}
@@ -36,4 +39,23 @@ body{background-color: #f1f4f9!important;font-family: "Microsoft YaHei", 微软�
 .about:hover,.article-show:hover{border: 1px solid #fff;  -webkit-box-shadow: rgba(0,170,255,.3) 0 0 8px;-moz-box-shadow: rgba(0,170,255,.3) 0 0 8px; box-shadow: rgba(0,170,255,.3) 0 0 8px;}
 
 
+.main-right .list-group .list-group-item:first-child{border-radius: 0;font-size: 16px;color: #000000;}
+.main-right .list-group .list-group-item:last-child{border-radius: 0;}
+.main-right .list-group .list-group-item{color: #3bba9a;}
+.main-right .list-group .list-group-item span{font-size: 12px;font-weight: 100;}
+
+.main-right .tags{background-color: #ffffff;height: auto;padding-bottom: 10px;}
+.main-right .tags a{border-left: none;border-top: none;border-right: none;}
+.main-right .tags .span{padding-right: 10px;padding-left: 10px;}
+.main-right .tags .span span{margin-top: 8px;display: inline-block;border-radius: 0;padding: 10px;}
+
+.footer{background-color: #222222;min-height: 80px;color: #b5b5b5;padding-top: 30px;}
+.footer .left:hover{color: #ffffff;}
+.footer .right:hover{color: #ffffff;}
+.footer a{color: #b5b5b5;}
+.footer a:hover{color: #ffffff;text-decoration: none;}
+.footer .right{text-align: right;}
+
+.article-show .title{margin: auto;text-align: left;font-size: 20px;margin-bottom:20px;}
+.article-show .content img{max-width:100%;}
 

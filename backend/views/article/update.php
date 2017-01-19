@@ -16,6 +16,7 @@ $this->title="修改 $model->title";
     <?php $form = ActiveForm::begin( ['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="col-lg-8">
         <?= $form->field($model, 'title')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'keywords')->textInput() ?>
         <?= $form->field($model, 'abstract')->textarea() ?>
         <?= $form->field($model, 'content')->widget(\yii\redactor\widgets\Redactor::className()           ,['clientOptions' => [
             'imageManagerJson' => ['/redactor/upload/image-json'],
@@ -40,6 +41,7 @@ $this->title="修改 $model->title";
         <!--            r \common\models\User::find()->select(['id','username'])->where(['status'=>10,'type'=>0])->all()-->
 
         <?= $form->field($model, 'issee')->checkbox() ?>
+        <?= $form->field($model, 'tag')->textInput() ?>
         <?= $form->field($model, 'userid')->widget(Select2::classname(), [
             'data' =>\yii\helpers\ArrayHelper::map(common\models\User::find()->where(['status'=>10,'type'=>0])->all(),'id','username'),
             'options' => ['placeholder' => '请选择作者'],

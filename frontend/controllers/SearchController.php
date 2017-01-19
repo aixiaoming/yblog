@@ -28,13 +28,9 @@ class SearchController extends BaseController
                 $articles = $articles->offset($pagination->offset)
                     ->limit($pagination->limit)
                     ->all();
-//                $articles = ArrayHelper::toArray( $articles);
-//                var_dump($articles);
-//                $articles = str_replace("解决","tihuan",$articles);
-//                var_dump($articles);
                 return $this->render('search',
                     [
-                        'search'=>$search,
+                        'search'=>$search['search'],
                         'articles'=>$articles,
                         'pager' => $pagination,
                     ]);
@@ -44,6 +40,24 @@ class SearchController extends BaseController
         }else{
             $this->redirect(['site/index']);
         }
+    }
 
+    public function actionSearchUseTag(){
+        $tag=Yii::$app->request->get('tag');
+        if(!empty($tag)){
+            $articles = Article::find()->where(['issee'=>1,'tag'=>$tag])->orderBy('createtime DESC');
+            $count = $articles->count();
+            $pageSize = Yii::$app->params['pageSize']['article'];
+            $pagination = new Pagination(['totalCount' => $count,'pageSize' => $pageSize]);
+            $articles = $articles->offset($pagination->offset)
+                ->limit($pagination->limit)
+                ->all();
+            return $this->render('searchusetag',
+                [
+                    'tag'=>$tag,
+                    'articles'=>$articles,
+                    'pager' => $pagination,
+                ]);
+        }
     }
 }

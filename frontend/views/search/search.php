@@ -17,8 +17,8 @@ $this->title = '搜索';
             <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><img src="<? echo $article->img;?>"></a>
         </div>
         <div class="col-sm-8">
-            <? echo str_ireplace($search, "<font color='red'><strong>$search</strong></font>", "wwwww");?>
-            <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><? echo $article->title;?></a>
+
+            <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><? echo str_ireplace($search, "<font color='red'><strong>$search</strong></font>",$article->title );?></a>
             <div class="col-sm-12 tip">
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-calendar">
@@ -34,12 +34,12 @@ $this->title = '搜索';
 
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-comment">
-                        评论
+                        评论 &nbsp;<span id = "sourceId::<? echo $article->id; ?>" class = "cy_cmt_count" ></span>
                     </span>
                 </div>
             </div>
             <div>
-                <p><? echo $article->abstract;?></p>
+                <p><? echo str_ireplace($search, "<font color='red'><strong>$search</strong></font>",$article->abstract );?></p>
             </div>
         </div>
     </div>
