@@ -3,7 +3,6 @@ namespace frontend\controllers;
 
 use common\models\Article;
 use common\models\Website;
-use frontend\sdk\connect\API\QC;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -24,6 +23,10 @@ use frontend\controllers\BaseController;
  */
 class SiteController extends BaseController
 {
+    private $qc;
+    protected $recorder;
+
+
     /**
      * @inheritdoc
      */
@@ -103,23 +106,18 @@ class SiteController extends BaseController
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        require ('../sdk/connect/API/qqConnectAPI.php');
-        $qc = new QC();
+        require_once("../../vendor/qqlogin/qqConnectAPI.php");
+        $qc = new \QC();
         $qc->qq_login();
     }
 
     public function actionQqlogin(){
-        $code = Yii::$app->request->get("code");
-        var_dump($code);
-        $state = Yii::$app->request->get("state");
-        var_dump($state);
-        require ('../sdk/connect/API/qqConnectAPI.php');
-        $qc = new QC();
-        $token=$qc->qq_callback();
-        var_dump($token);
-        //$token = $qc->get_access_token();
-        $openid = $qc->get_openid();
-        $rec=$qc->get_info();
+        require_once("../../vendor/qqlogin/qqConnectAPI.php");
+        $auth = new \Oauth();
+        $token=$auth->qq_callback();
+        $openid=$auth->get_openid();
+        $qc = new \QC($token,$openid);
+        $rec=$qc->get_user_info();
         var_dump($rec);
     }
 
