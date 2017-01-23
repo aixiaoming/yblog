@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\Article;
 use common\models\Website;
+use frontend\sdk\connect\API\QC;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -15,6 +16,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\data\Pagination;
 use frontend\controllers\BaseController;
+
 
 /**
  * Site controller
@@ -100,14 +102,21 @@ class SiteController extends BaseController
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
+//        $model = new LoginForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+//            return $this->goBack();
+//        } else {
+//            return $this->render('login', [
+//                'model' => $model,
+//            ]);
+//        }
+        //qq登录
+
+        require ('../sdk/connect/API/qqConnectAPI.php');
+//        require ('../sdk/connect/API/class/QC.class.php');
+        $qc = new QC();
+        $ret = $qc->get_info();
+        var_dump($ret);
     }
 
     /**
