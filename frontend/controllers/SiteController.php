@@ -18,6 +18,7 @@ use yii\data\Pagination;
 use frontend\controllers\BaseController;
 
 
+
 /**
  * Site controller
  */
@@ -77,11 +78,7 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
-        require ('../sdk/connect/API/qqConnectAPI.php');
-//        require ('../sdk/connect/API/class/QC.class.php');
-        $qc = new QC();
-        $ret = $qc->get_info();
-        var_dump($ret);
+
         $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC');
         $count = $articles->count();
         $pageSize = Yii::$app->params['pageSize']['site'];
@@ -106,21 +103,20 @@ class SiteController extends BaseController
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
-//        $model = new LoginForm();
-//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//            return $this->goBack();
-//        } else {
-//            return $this->render('login', [
-//                'model' => $model,
-//            ]);
-//        }
-        //qq登录
-
         require ('../sdk/connect/API/qqConnectAPI.php');
-//        require ('../sdk/connect/API/class/QC.class.php');
         $qc = new QC();
         $qc->qq_login();
+    }
+
+    public function actionQqlogin(){
+        $code = Yii::$app->request->get("code");
+        require ('../sdk/connect/API/qqConnectAPI.php');
+        $qc = new QC();
+        $token=$qc->qq_callback();
+        //$token = $qc->get_access_token();
+        $openid = $qc->get_openid();
+        $rec=$qc->get_info();
+        var_dump($rec);
     }
 
     /**
