@@ -110,9 +110,13 @@ class SiteController extends BaseController
 
     public function actionQqlogin(){
         $code = Yii::$app->request->get("code");
+        var_dump($code);
+        $state = Yii::$app->request->get("state");
+        var_dump($state);
         require ('../sdk/connect/API/qqConnectAPI.php');
         $qc = new QC();
         $token=$qc->qq_callback();
+        var_dump($token);
         //$token = $qc->get_access_token();
         $openid = $qc->get_openid();
         $rec=$qc->get_info();
