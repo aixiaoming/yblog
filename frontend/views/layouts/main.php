@@ -114,12 +114,9 @@ $this->registerJsFile('../../frontend/web/js/zzsc.js');
                           <input class="form-control" type="text" placeholder="搜些什么吧" name="search">
                           <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                         </div>
-<!--                         <div class="form-group"> -->
-<!--                             <input type="text" placeholder="搜些什么吧" name="search"> -->
-<!--                         </div> -->
-<!--                         <button type="submit"><span class="glyphicon glyphicon-search"></span></button> -->
                     </form>
-                    <li><a href="<?  echo Url::to(['site/login'])?>">登录</a></li>
+<!--                    <li><a href="#" onclick='toQzoneLogin()'>QQ登录</a></li>-->
+                    <li><a href="<?  echo Url::to(['site/login'])?>">QQ登录</a></li>
                 </ul>
             </div>
         </div>
@@ -206,6 +203,9 @@ $this->registerJsFile('../../frontend/web/js/zzsc.js');
 </body>
 </html>
 <?php $this->endPage() ?>
+
+
+<!--百度统计-->
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -215,6 +215,9 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+
+
+<!--右侧标签颜色与晃动-->
 <script type="text/javascript">
     $('.input-group-addon').click(function(){
         $('.navbar-form').submit();
@@ -233,4 +236,5 @@ var _hmt = _hmt || [];
 
 
 
+<!--百度站内搜索-->
 <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8003703580612802368' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>

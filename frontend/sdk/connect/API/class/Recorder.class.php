@@ -15,6 +15,7 @@ class Recorder{
         $this->error = new ErrorCase();
 
         //-------读取配置文件
+        var_dump(ROOT);
         $incFileContents = file(ROOT."comm/inc.php");
         $incFileContents = $incFileContents[1];
         $this->inc = json_decode($incFileContents);

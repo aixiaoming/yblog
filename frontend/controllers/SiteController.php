@@ -77,6 +77,11 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+        require ('../sdk/connect/API/qqConnectAPI.php');
+//        require ('../sdk/connect/API/class/QC.class.php');
+        $qc = new QC();
+        $ret = $qc->get_info();
+        var_dump($ret);
         $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC');
         $count = $articles->count();
         $pageSize = Yii::$app->params['pageSize']['site'];
@@ -115,8 +120,7 @@ class SiteController extends BaseController
         require ('../sdk/connect/API/qqConnectAPI.php');
 //        require ('../sdk/connect/API/class/QC.class.php');
         $qc = new QC();
-        $ret = $qc->get_info();
-        var_dump($ret);
+        $qc->qq_login();
     }
 
     /**
