@@ -116,7 +116,7 @@ $this->registerJsFile('../../frontend/web/js/zzsc.js');
                         </div>
                     </form>
 <!--                    <li><a href="#" onclick='toQzoneLogin()'>QQ登录</a></li>-->
-                    <li><a href="<?  echo Url::to(['site/login'])?>">QQ登录</a></li>
+		  <!--  <li><a href="<? // echo Url::to(['site/login'])?>">QQ登录</a></li> -->
                 </ul>
             </div>
         </div>
