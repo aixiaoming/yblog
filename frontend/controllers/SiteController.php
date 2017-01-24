@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Article;
+use common\models\Qquser;
 use common\models\Website;
 use Yii;
 use yii\base\InvalidParamException;
@@ -23,8 +24,6 @@ use frontend\controllers\BaseController;
  */
 class SiteController extends BaseController
 {
-    private $qc;
-    protected $recorder;
 
 
     /**
@@ -118,7 +117,24 @@ class SiteController extends BaseController
         $openid=$auth->get_openid();
         $qc = new \QC($token,$openid);
         $rec=$qc->get_user_info();
-        var_dump($rec);
+        $quser = new Qquser();
+        if (!$olduser=$quser->is_new($openid)){
+            if(!$newuser=$quser->singup($openid,$rec)){
+                Yii::$app->session->setFlash('error','登录失败');
+                $this->redirect(['site/index']);
+                Yii::$app->end();
+            }else{
+                Yii::$app->session['login_id'] = $quser->getid($openid);
+                Yii::$app->session['login_user'] = $rec['nickname'];
+            }
+        }else{
+            Yii::$app->session['login_id'] = $olduser->id;
+            Yii::$app->session['login_user'] = $olduser->username;
+        }
+
+        Yii::$app->session->setFlash('success','登录成功');
+        $this->redirect(['site/index']);
+        Yii::$app->end();
     }
 
     /**
@@ -194,19 +210,6 @@ class SiteController extends BaseController
     }
 
 
-//$model = new SignupForm();
-//if ($model->load(Yii::$app->request->post())) {
-//if ($user = $model->signup()) {
-//yii::$app->session->setFlash('success','新增管理员成功。');
-//$this->redirect(['manager/index']);
-//Yii::$app->end();
-//}
-//}
-//
-//return $this->render('add', [
-//    'model' => $model,
-//]);
-
     /**
      * Requests password reset.
      *
@@ -256,3 +259,6 @@ class SiteController extends BaseController
         ]);
     }
 }
+
+//array(18) {
+//    ["ret"]=> int(0) ["msg"]=> string(0) "" ["is_lost"]=> int(0) ["nickname"]=> string(27) "第一个网名是啥来着" ["gender"]=> string(3) "男" ["province"]=> string(6) "河南" ["city"]=> string(6) "洛阳" ["year"]=> string(4) "1995" ["figureurl"]=> string(73) "http://qzapp.qlogo.cn/qzapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/30" ["figureurl_1"]=> string(73) "http://qzapp.qlogo.cn/qzapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/50" ["figureurl_2"]=> string(74) "http://qzapp.qlogo.cn/qzapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/100" ["figureurl_qq_1"]=> string(69) "http://q.qlogo.cn/qqapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/40" ["figureurl_qq_2"]=> string(70) "http://q.qlogo.cn/qqapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/100" ["is_yellow_vip"]=> string(1) "0" ["vip"]=> string(1) "0" ["yellow_vip_level"]=> string(1) "0" ["level"]=> string(1) "0" ["is_yellow_year_vip"]=> string(1) "0" }

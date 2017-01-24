@@ -115,8 +115,7 @@ $this->registerJsFile('../../frontend/web/js/zzsc.js');
                           <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                         </div>
                     </form>
-<!--                    <li><a href="#" onclick='toQzoneLogin()'>QQ登录</a></li>-->
-		  <!--  <li><a href="<? // echo Url::to(['site/login'])?>">QQ登录</a></li> -->
+		    <li><a href="<?  echo Url::to(['site/login'])?>"><?php echo empty(Yii::$app->session['login_id'])?"QQ登录":Yii::$app->session['login_user'];?></a></li>
                 </ul>
             </div>
         </div>

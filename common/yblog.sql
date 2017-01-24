@@ -33,7 +33,17 @@ CREATE TABLE `frontmenu` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
+CREATE TABLE `qquser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` CHAR(32) NOT NULL ,
+  `username` VARCHAR(150) NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '10',
+  `lastip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY(`openid`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT 'qq用户列表';
 
 
 

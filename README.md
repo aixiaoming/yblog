@@ -52,3 +52,7 @@ environments/            contains environment-based overrides
 tests                    contains various tests for the advanced application
     codeception/         contains tests developed with Codeception PHP Testing Framework
 ```
+
+
+qqlogin 放在vendor中,其实就是qq第三方登陆的API
+无法通过composer安装
