@@ -9,13 +9,12 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\data\Pagination;
-use frontend\controllers\BaseController;
+use common\helps\helpfun;
 
 
 
@@ -24,38 +23,6 @@ use frontend\controllers\BaseController;
  */
 class SiteController extends BaseController
 {
-
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -80,6 +47,18 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+        //qq登录手机版的地址是首页，不知道啥原因，所以要调转
+        $helpfun = new Helpfun();
+        if($helpfun->is_Mobile()){
+            $code = Yii::$app->request->get("code");
+            $state = Yii::$app->request->get("state");
+            if (isset($code) && isset($state)){
+                $this->redirect(['site/qqlogin','code'=>$code,'state'=>$state]);
+                Yii::$app->end();
+            }
+        }
+
+
 
         $articles = Article::find()->where(['issee'=>1])->orderBy('createtime DESC');
         $count = $articles->count();
@@ -144,9 +123,15 @@ class SiteController extends BaseController
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        if(isset(Yii::$app->session['login_id']) && Yii::$app->session['login_user']){
+            $this->redirect(['site/index']);
+        }
+        unset(Yii::$app->session['login_id']);
+        unset(Yii::$app->session['login_user']);
+        Yii::$app->session->setFlash('success','退出成功');
 
-        return $this->goHome();
+        $this->redirect(['site/index']);
+        Yii::$app->end();
     }
 
     /**
