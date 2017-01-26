@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
 
 
 
-class ArticleController extends Controller
+class ArticleController extends BaseController
 {
     public function actionAdd()
     {

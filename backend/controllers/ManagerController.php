@@ -13,7 +13,7 @@ use yii\data\Pagination;
 /**
  * Site controller
  */
-class ManagerController extends Controller
+class ManagerController extends BaseController
 {
 
     public function actionIndex(){

@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 
 
 
-class WebsiteController extends \yii\web\Controller
+class WebsiteController extends BaseController
 {
     public function actionIndex()
     {

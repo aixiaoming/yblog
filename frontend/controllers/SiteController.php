@@ -14,7 +14,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\data\Pagination;
-use common\helps\helpfun;
+use \common\helps\Helpfun;
+use yii\web\Cookie;
 
 
 
@@ -47,6 +48,8 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+		//var_dump(json_decode(str_replace('\"','"', $_COOKIE['on_login']),true));
+		
         //qq登录手机版的地址是首页，不知道啥原因，所以要调转
         $helpfun = new Helpfun();
         if($helpfun->is_Mobile()){
@@ -103,13 +106,30 @@ class SiteController extends BaseController
                 $this->redirect(['site/index']);
                 Yii::$app->end();
             }else{
-                Yii::$app->session['login_id'] = $quser->getid($openid);
-                Yii::$app->session['login_user'] = $rec['nickname'];
+                $session=Yii::$app->getSession();
+                $session->set('login_id',$quser->getid($openid));
+                $session->set('login_user',$rec['nickname']);
             }
         }else{
-            Yii::$app->session['login_id'] = $olduser->id;
-            Yii::$app->session['login_user'] = $olduser->username;
+            $session=Yii::$app->getSession();
+            $session->set('login_id',$olduser->id);
+            $session->set('login_user',$olduser->username);
+
+			//设置cookie 保持长时间登录
+            $identityCookie = ['name' => 'on_login', 'httpOnly' => true];
+            $cookie = new Cookie($identityCookie);
+            $cookie->value = json_encode([
+                $olduser->id,
+                $olduser->username,
+                3600*24*30,
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $cookie->expire = time() + 3600*24*30;
+            Yii::$app->getResponse()->getCookies()->add($cookie);
+
         }
+
+
+
 
         Yii::$app->session->setFlash('success','登录成功');
         $this->redirect(['site/index']);

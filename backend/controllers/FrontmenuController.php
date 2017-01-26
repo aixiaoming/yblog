@@ -12,7 +12,7 @@ use Yii;
 use common\models\Frontmenu;
 use yii\web\Controller;
 
-class FrontmenuController extends Controller{
+class FrontmenuController extends BaseController{
 
     public function actionIndex()
     {

@@ -5,11 +5,13 @@ namespace frontend\controllers;
 use common\models\Article;
 use common\models\Frontmenu;
 use yii;
+use yii\web\Cookie;
 
 class BaseController extends yii\web\Controller{
 
     public function init()
     {
+		//if(isset($_COOKIE['onlogin']))
         $menu = Frontmenu::find()->where(['parentid'=>0])->all();
         $this->view->params['menu'] = $menu;
 
