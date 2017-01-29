@@ -7,8 +7,6 @@ use common\models\Website;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -48,8 +46,6 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
-		//var_dump(json_decode(str_replace('\"','"', $_COOKIE['on_login']),true));
-		
         //qq登录手机版的地址是首页，不知道啥原因，所以要调转
         $helpfun = new Helpfun();
         if($helpfun->is_Mobile()){
@@ -100,35 +96,33 @@ class SiteController extends BaseController
         $qc = new \QC($token,$openid);
         $rec=$qc->get_user_info();
         $quser = new Qquser();
-        if (!$olduser=$quser->is_new($openid)){
-            if(!$newuser=$quser->singup($openid,$rec)){
+        if (!$olduser=$quser->is_new($openid)){//判断是否为新用户
+            if(!$newuser=$quser->singup($openid,$rec)){//判断新用户是否注册成功
                 Yii::$app->session->setFlash('error','登录失败');
                 $this->redirect(['site/index']);
                 Yii::$app->end();
-            }else{
+            }else{//新用户是否注册成功
                 $session=Yii::$app->getSession();
                 $session->set('login_id',$quser->getid($openid));
                 $session->set('login_user',$rec['nickname']);
+                $data = serialize ([$openid,$quser->getid($openid)]);
             }
-        }else{
+        }else{//老用户
             $session=Yii::$app->getSession();
             $session->set('login_id',$olduser->id);
             $session->set('login_user',$olduser->username);
-
-			//设置cookie 保持长时间登录
-            $identityCookie = ['name' => 'on_login', 'httpOnly' => true];
-            $cookie = new Cookie($identityCookie);
-            $cookie->value = json_encode([
-                $olduser->id,
-                $olduser->username,
-                3600*24*30,
-            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-            $cookie->expire = time() + 3600*24*30;
-            Yii::$app->getResponse()->getCookies()->add($cookie);
-
+            $data = serialize ([$openid,$olduser->id]);
         }
 
-
+        //设置cookie 保持长时间登录
+        // 从"response"组件中获取cookie 集合(yii\web\CookieCollection)
+        $cookies = Yii::$app->response->cookies;
+        // 在要发送的响应中添加一个新的cookie
+        $cookies->add(new Cookie([
+            'name' => 'is_login',
+            'value' =>$data,
+            'expire' => time()+3600*24*30,
+        ]));
 
 
         Yii::$app->session->setFlash('success','登录成功');
@@ -143,15 +137,20 @@ class SiteController extends BaseController
      */
     public function actionLogout()
     {
-        if(isset(Yii::$app->session['login_id']) && Yii::$app->session['login_user']){
+        //判断是否存在session 如果存在就清除session与cookice 否则就调回首页
+        if(isset(Yii::$app->session['login_id']) && isset(Yii::$app->session['login_user'])){
+            //清除session
+            unset(Yii::$app->session['login_id']);
+            unset(Yii::$app->session['login_user']);
+            $cookies = Yii::$app->response->cookies;
+            //清除cookice
+            unset($cookies['is_login']);
+            Yii::$app->session->setFlash('success','退出成功');
+            $this->redirect(['site/index']);
+            Yii::$app->end();
+        }else{
             $this->redirect(['site/index']);
         }
-        unset(Yii::$app->session['login_id']);
-        unset(Yii::$app->session['login_user']);
-        Yii::$app->session->setFlash('success','退出成功');
-
-        $this->redirect(['site/index']);
-        Yii::$app->end();
     }
 
     /**
@@ -264,6 +263,3 @@ class SiteController extends BaseController
         ]);
     }
 }
-
-//array(18) {
-//    ["ret"]=> int(0) ["msg"]=> string(0) "" ["is_lost"]=> int(0) ["nickname"]=> string(27) "第一个网名是啥来着" ["gender"]=> string(3) "男" ["province"]=> string(6) "河南" ["city"]=> string(6) "洛阳" ["year"]=> string(4) "1995" ["figureurl"]=> string(73) "http://qzapp.qlogo.cn/qzapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/30" ["figureurl_1"]=> string(73) "http://qzapp.qlogo.cn/qzapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/50" ["figureurl_2"]=> string(74) "http://qzapp.qlogo.cn/qzapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/100" ["figureurl_qq_1"]=> string(69) "http://q.qlogo.cn/qqapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/40" ["figureurl_qq_2"]=> string(70) "http://q.qlogo.cn/qqapp/101381338/DBF7135BC86C14AE6B11BB42EFE847C6/100" ["is_yellow_vip"]=> string(1) "0" ["vip"]=> string(1) "0" ["yellow_vip_level"]=> string(1) "0" ["level"]=> string(1) "0" ["is_yellow_year_vip"]=> string(1) "0" }

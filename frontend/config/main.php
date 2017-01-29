@@ -14,6 +14,8 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            //cookice验证
+            'cookieValidationKey' => 'my name is xiaoming',
         ],
         'user' => [
             'identityClass' => 'common\models\User',

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Article;
 use common\models\Frontmenu;
+use common\models\Qquser;
 use yii;
 use yii\web\Cookie;
 
@@ -11,7 +12,24 @@ class BaseController extends yii\web\Controller{
 
     public function init()
     {
-		//if(isset($_COOKIE['onlogin']))
+        //先判断是否有session
+        //检测是否有已登录的登录cookie
+        // 从 "request"组件中获取cookie集合(yii\web\CookieCollection)
+        $cookies = Yii::$app->request->cookies;
+        if ($cookies->has('is_login')){
+            if(empty(Yii::$app->Session['login_id'])){
+                //将得到的cookice反序列化
+                $login_user = unserialize($cookies->getValue('is_login', null));;
+                $user = new Qquser();
+                //验证cookie
+                if ($newuser = $user->checklogincook($login_user)){
+                    $session=Yii::$app->getSession();
+                    $session->set('login_id',$newuser->id);
+                    $session->set('login_user',$newuser->username);
+                }
+            }
+        }
+
         $menu = Frontmenu::find()->where(['parentid'=>0])->all();
         $this->view->params['menu'] = $menu;
 

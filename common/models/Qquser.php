@@ -80,4 +80,15 @@ class Qquser extends \yii\db\ActiveRecord
     public function getid($openid){
         return self::findOne(['openid'=>$openid])->id;
     }
+
+    /**
+     *验证cookice，判断是否登录，如果登录就返回$user，否则返回false
+     */
+    public function checklogincook($cookice){
+        $user = self::find()->where(['id'=>$cookice['1']])->one();
+        if ($cookice['0']==$user->openid){
+            return $user;
+        }
+        return false;
+    }
 }
