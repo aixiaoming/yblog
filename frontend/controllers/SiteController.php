@@ -123,8 +123,7 @@ class SiteController extends BaseController
             'value' =>$data,
             'expire' => time()+3600*24*30,
         ]));
-
-
+        $quser->saveip(Yii::$app->session['login_id']);
         Yii::$app->session->setFlash('success','登录成功');
         $this->redirect(['site/index']);
         Yii::$app->end();

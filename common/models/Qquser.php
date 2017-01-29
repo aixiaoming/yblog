@@ -91,4 +91,21 @@ class Qquser extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    /**
+     *存储用户的登录ip
+     */
+    public function saveip($id){
+        $ip = Yii::$app->request->getUserIP();
+        $user = self::getuserbyid($id);
+        $user->lastip = $ip;
+        return $user->save()?true:false;
+    }
+
+    /**
+     * 根据id得到user
+     */
+    public function getuserbyid($id){
+        return $user = self::findOne($id);
+    }
 }

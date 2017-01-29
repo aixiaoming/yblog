@@ -26,6 +26,7 @@ class BaseController extends yii\web\Controller{
                     $session=Yii::$app->getSession();
                     $session->set('login_id',$newuser->id);
                     $session->set('login_user',$newuser->username);
+                    $user->saveip($login_user[1]);
                 }
             }
         }
