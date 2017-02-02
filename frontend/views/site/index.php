@@ -51,7 +51,7 @@ $this->title = '首页';
 </div>
 
 <script id="cy_cmt_num" 
-			src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cysI0uifa">
+			src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cysI0uifa">
 </script>
 
 
