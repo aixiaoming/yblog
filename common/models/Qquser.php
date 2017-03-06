@@ -14,6 +14,7 @@ use Yii;
  * @property string $lastip
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string userlogo
  */
 class Qquser extends \yii\db\ActiveRecord
 {
@@ -69,6 +70,7 @@ class Qquser extends \yii\db\ActiveRecord
     public function singup($openid,$rec){
         $this->openid=$openid;
         $this->username=$rec['nickname'];
+        $this->userlogo = $rec['figureurl_qq_1'];
         $this->status=10;
         $this->created_at=time();
         return $this->save()?true:false;

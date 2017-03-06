@@ -45,8 +45,28 @@ CREATE TABLE `qquser` (
   KEY(`openid`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT 'qq用户列表';
 
+CREATE TABLE `comments`(
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `article_id` INT(11) NOT NULL,
+  `content` VARCHAR(500) NOT NULL ,
+  `user_id` INT(11) NOT NULL ,
+  PRIMARY KEY (`id`),
+  KEY (`article_id`),
+  KEY (`user_id`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '评论表';
 
 
+CREATE TABLE `reply`(
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `comment_id` INT(11) NOT NULL COMMENT '评论ID',
+  `reply_id` INT(11) NOT NULL COMMENT '回复目标id',
+  `reply_type` TINYINT NOT NULL COMMENT '回复类型 0 评论的 1回复的',
+  `content` VARCHAR(500) NOT NULL ,
+  `user_id` INT(11) NOT NULL COMMENT '用户id',
+  `to_uid` INT(11) NOT NULL COMMENT '回复人的id',
+  PRIMARY KEY (`id`),
+  KEY (`comment_id`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '回复表';
 
 
 

@@ -6,6 +6,7 @@ use common\models\Qquser;
 use common\models\Website;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -101,7 +102,7 @@ class SiteController extends BaseController
                 Yii::$app->session->setFlash('error','登录失败');
                 $this->redirect(['site/index']);
                 Yii::$app->end();
-            }else{//新用户是否注册成功
+            }else{//新用户注册成功
                 $session=Yii::$app->getSession();
                 $session->set('login_id',$quser->getid($openid));
                 $session->set('login_user',$rec['nickname']);
@@ -125,7 +126,8 @@ class SiteController extends BaseController
         ]));
         $quser->saveip(Yii::$app->session['login_id']);
         Yii::$app->session->setFlash('success','登录成功');
-        $this->redirect(['site/index']);
+        //$this->redirect(['site/index']);
+        $this->goBack();
         Yii::$app->end();
     }
 

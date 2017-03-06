@@ -59,3 +59,33 @@ body{background-color: #f1f4f9!important;font-family: "Microsoft YaHei", 微软�
 .article-show .title{margin: auto;text-align: left;font-size: 20px;margin-bottom:20px;}
 .article-show .content img{max-width:100%;}
 
+
+/*评论background-color: #00a7d0;*/
+/*
+.comment{height: auto;min-height: 180px;}
+.comment .col-sm-12,col-sm-11{padding-left: 0!important;padding-right: 0!important;}
+.comment #com_all{padding: 5px!important;border: 1px solid #4398ed;border-radius: 4px;}
+.comment .userlogo{width: 40px;margin-left:5px;border-radius: 50%;}
+.comment .com_text{padding: 10px 0 5px 5px;border-radius: 3px;border-color: #49483e;height: auto;width: 100%;}
+.comment #com_all .com_cap_div{border-bottom: 1px solid #4398ed;padding-bottom: 5px;}
+.comment #com_all .com_cap_div span{padding-left: 0;color: #fe1919}
+.comment #com_all .com_cap_div .valid{float: left;margin-right: 10px;border-radius: 4px;}
+.comment #com_all .com_cap_div input{border-radius: 4px;border: 1px solid #cccccc; }
+.comment #com_all .com_cap_div input:focus{outline: none;padding-left: 5px;}
+.comment .com_btn{float: right;margin-bottom: 3px;}
+.comment textarea {resize : none;border: none;min-height: 60px;width: 100%;background-color: transparent;}
+.comment textarea:focus{border: none!important;outline:none;}
+.comment .com_con{padding: 10px;display:block;}
+.comment .com_none{display: none;}
+.comment .com_rep{margin-top: 30px;}
+.comment .com_rep #com_all{float: right;margin-bottom: 15px;}
+.comment .reply_btn{color: #4c4c4c;float: right;}
+.comment .one_com{padding-top: 15px;padding-bottom: 10px;border-bottom: 1px dashed #ccc;}
+.comment .one_com .old_com{padding-right: 0!important;}
+.comment .one_com .usermeg{height: 40px;line-height: 40px;}
+.comment .one_com .content{margin-top: 10px;}
+.comment .reply_btn:hover{color: #428bca;text-decoration: none;}
+.comment .reply_btn:focus{color: #3988ca;text-decoration: none;outline: none;}
+.comment .cancle_reply{text-decoration: none;outline: none;color:#428bca;float: right;}
+.comment .cancle_reply:hover{color: #ff0000!important;}
+.comment .one_rep{border-top: 1px dashed #ccc;padding-top: 10px;padding-bottom: 5px;}*/

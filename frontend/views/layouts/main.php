@@ -211,7 +211,7 @@ $this->registerJsFile('../../frontend/web/js/zzsc.js');
 
 
 <!--百度统计-->
-<script>
+<!--<script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -219,7 +219,7 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
-</script>
+</script>-->
 
 
 <!--右侧标签颜色与晃动-->
