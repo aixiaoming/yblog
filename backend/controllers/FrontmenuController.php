@@ -14,6 +14,16 @@ use yii\web\Controller;
 
 class FrontmenuController extends BaseController{
 
+    /**
+     * 删除‘menu’缓存
+     */
+    private function deletecache(){
+        $cache = Yii::$app->cache;
+        if($cache->exists('menu')){//如果存在缓存，就删除
+            $cache->delete('menu');
+        }
+    }
+
     public function actionIndex()
     {
         $this->layout='mainart.php';
@@ -27,13 +37,9 @@ class FrontmenuController extends BaseController{
     public function actionAdd()
     {
         $model = new Frontmenu();
-//        $list1 = $model->getDatas();
         $list = $model->getOptions();
-//        $list1=$model->getdata();
-//        var_dump($list1);
-//        var_dump($list);
-//        var_dump(Yii::$app->request->post());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->deletecache();//添加菜单成功，删除原有缓存
             $this->redirect(['frontmenu/index']);
         }
         return $this->render("add", ['list' => $list, 'model' => $model]);
@@ -48,6 +54,7 @@ class FrontmenuController extends BaseController{
             $post = Yii::$app->request->post();
             if ($model->load($post) && $model->save()) {
                 Yii::$app->session->setFlash('info', '修改成功');
+                $this->deletecache();//添加菜单成功，删除原有缓存
                 $this->redirect(['frontmenu/index']);
                 Yii::$app->end();
             }
@@ -73,6 +80,7 @@ class FrontmenuController extends BaseController{
         } catch(\Exception $e) {
             Yii::$app->session->setFlash('info', $e->getMessage());
         }
+        $this->deletecache();//添加菜单成功，删除原有缓存
         return $this->redirect(['frontmenu/index']);
     }
 

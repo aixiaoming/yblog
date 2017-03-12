@@ -188,7 +188,7 @@ class SiteController extends BaseController
 
         return $this->render('about',
         [
-        'model'=>$model,
+            'model'=>$model,
         ]
         );
     }

@@ -31,8 +31,16 @@ class BaseController extends yii\web\Controller{
             }
         }
 
-        $menu = Frontmenu::find()->where(['parentid'=>0])->all();
-        $this->view->params['menu'] = $menu;
+        $cache = Yii::$app->cache;
+        $menu=$cache->get('menu');
+        if ($menu){//如果有缓存
+            $this->view->params['menu'] = $menu;
+        }else{//如果没有缓存，就创建
+            $menu = Frontmenu::find()->where(['parentid'=>0])->all();
+            $this->view->params['menu'] = $menu;
+            $cache->set('menu',$menu);
+        }
+
 
         $newarticle = Article::find()->where(['issee'=>1])->orderBy('createtime DESC')->limit(5)->all();
         $this->view->params['newarticle'] = $newarticle;

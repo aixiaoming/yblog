@@ -5,7 +5,6 @@ use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 
-
 $this->title = '首页';
 ?>
 
@@ -14,7 +13,7 @@ $this->title = '首页';
 <? foreach ($articles as $article):?>
     <div  class="row index-list">
         <div class="col-sm-4 img">
-            <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><img src="<? echo $article->img;?>"></a>
+            <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><img src="<? echo $article->img;?>" onerror="this.src='../../upload/articleimg/14860245759240.jpg'"></a>
         </div>
         <div class="col-sm-8">
             <a href="<? echo Url::to(['article/show','id'=>$article->id])?>"><? echo $article->title;?></a>
